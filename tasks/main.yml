@@ -6,8 +6,8 @@
   pkgin: name=zookeeper-server state=present
 
 - name: configure zookeeper
-  template: src=zoo.cfg dest=/opt/local/etc/zookeeper/zoo.cfg mode=0644 backup=yes
-  template: src=myid dest=/var/db/zookeeper/myid mode=0644
+  template: src=zoo.cfg.j2 dest=/opt/local/etc/zookeeper/zoo.cfg mode=0644 backup=yes
+  template: src=myid.j2 dest=/var/db/zookeeper/myid mode=0644
   notify: 
     - restart zookeeper
 
