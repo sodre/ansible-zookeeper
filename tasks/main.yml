@@ -1,0 +1,15 @@
+---
+# tasks file for zookeeper
+
+- name: install zookeeper
+  #ignore_errors: true
+  pkgin: name=zookeeper-server state=present
+
+- name: configure zookeeper
+  template: src=zoo.cfg dest=/opt/local/etc/zookeeper/zoo.cfg mode=0644 backup=yes
+  template: src=myid dest=/var/db/zookeeper/myid mode=0644
+  notify: 
+    - restart zookeeper
+
+- name: enable zookeeper
+  service: name=zookeeper state=started
